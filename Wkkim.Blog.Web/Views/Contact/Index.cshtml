@@ -1,0 +1,141 @@
+﻿@model Wkkim.Blog.Web.Models.ContactForm
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="banner contact_banner">
+    <div class="container">
+        <h2>GET IN TOUCH</h2>
+    </div>
+</div>
+
+<section class="contact-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 d-flex justify-content-center flex-column">
+                <h2>Contact Me</h2>
+                <p class="m-0">Please Contact me. if you are interested in my carrers.</p>
+                <div class="d-flex gap-4">
+                    <div><i class="fa-solid fa-envelope"></i></div>
+                    <div>
+                        <h5>Email</h5>
+                        <p>wkkim.blog@gmail.com</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-4">
+                    <div><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <h5>Phone</h5>
+                        <p>(HU)+36-20-266-1084</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="Message-form">
+                    <h4>LET'S TALK TO ME</h4>
+
+
+                    <form id="Subscribe-massage2">
+                        <input asp-for="FullName" autocomplete="off" placeholder="Full Name">
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                        <input asp-for="EmailAddress" autocomplete="off" placeholder="Email Address">
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        <input asp-for="PhoneNo" autocomplete="off" placeholder="Mobile Number">
+                        <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                        <textarea asp-for="Message" cols="30" rows="10" placeholder="Message"></textarea>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button class="hover2" type="submit">Submit</button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+            <div id="Succes-box2"></div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Subscribe-massage2').submit(function (e) {
+            e.preventDefault();
+
+            var formData = $(this).serialize();
+            var formObject = {};
+            formData.split('&').forEach(function (item) {
+                var keyValue = item.split('=');
+                formObject[keyValue[0]] = decodeURIComponent(keyValue[1]);
+            });
+
+
+            if (formObject.FullName && formObject.EmailAddress && formObject.PhoneNo && formObject.Message) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SendContact", "Contact")',
+                    data: formData,
+
+                    success: function (response) {
+                        if (response.status) {
+                            let form = document.getElementById('Subscribe-massage2');
+                            let successMessage = document.getElementById('Succes-box2');
+                            successMessage.innerHTML = `
+                                                    <i class="fa-solid fa-check"></i>
+                                                            <h4>${response.heading}</h4>
+                                                                    <h5>${response.message}</h5>
+                                                    `;
+                            successMessage.style.display = 'block';
+                            successMessage.style.visibility = 'visible';
+                            form.reset()
+                            setTimeout(() => {
+                                successMessage.style.display = 'none'
+                            }, 3000)
+                        } else {
+                            let form = document.getElementById('Subscribe-massage2');
+                            let successMessage = document.getElementById('Succes-box2');
+                            successMessage.innerHTML = `
+                                                                    <i class="fa-solid fa-xmark"></i>
+                                                                    <h4>${response.heading}</h4>
+                                                                            <h5>${response.message}</h5>
+                                                            `;
+                            successMessage.style.display = 'block';
+                            successMessage.style.visibility = 'visible';
+                            form.reset()
+                            setTimeout(() => {
+                                successMessage.style.display = 'none';
+                            }, 3000)
+                        }
+                    },
+                    error: function (error) {
+                        console.error("Error:", error);
+                        let form = document.getElementById('Subscribe-massage2');
+                        let successMessage = document.getElementById('Succes-box2');
+                        successMessage.innerHTML = `
+                                                                    <i class="fa-solid fa-xmark"></i>
+                                                                    <h4>${error.heading}</h4>
+                                                                            <h5>${error.message}</h5>
+                                                            `;
+                        successMessage.style.display = 'block';
+                        successMessage.style.visibility = 'visible';
+                        form.reset()
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 3000)
+                    }
+                });
+            }
+        });
+    })
+</script>
+
+

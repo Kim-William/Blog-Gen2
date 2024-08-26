@@ -1,0 +1,168 @@
+﻿<!-- ======== 1.1. header section ======== -->
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager
+
+<header>
+    <nav class="container navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <!-- site logo -->
+            <a class="nav-logo p-0" asp-controller="Home" asp-action="Index">
+                <img src="/image/logo.svg" alt="logo">
+            </a>
+            <!-- navigation button  -->
+            <button class="open-aside" onclick="open_aside()" type="button">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <!-- navigation bar manu  -->
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav d-flex justify-content-center align-items-center gap-lg-4 gap-md-2 gap-sm-2 gap-2 mb-2 mb-lg-0">
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <li class="nav-link dropdown">
+                            <a class="nav-link dropdown-toggle @(IsDropdownActive("/Admin") ? " active" : "" )" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item @(IsCurrentPage("/AdminTags/Add")?"active-color":"")" asp-area="" asp-controller="AdminTags" asp-action="Add">Add Tag</a></li>
+                                <li><a class="dropdown-item @(IsCurrentPage("/AdminTags/List")?"active-color":"")" asp-area="" asp-controller="AdminTags" asp-action="List">Show All Tags</a></li>
+                                <li><a class="dropdown-item @(IsCurrentPage("/AdminBlogPosts/Add")?"active-color":"")" asp-area="" asp-controller="AdminBlogPosts" asp-action="Add">Add Blog Post</a></li>
+                                <li><a class="dropdown-item @(IsCurrentPage("/AdminBlogPosts/List")?"active-color":"")" asp-area="" asp-controller="AdminBlogPosts" asp-action="List">Show All BlogPosts</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    <li class="nav-item">
+                        <a class="nav-link @(IsCurrentPage("/")?"active":"")" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link @(IsDropdownActive("/Blogs") ? " active" : "" )" href="#">
+                            Blogs <i class="fa-sharp fa-solid fa-sort-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item @(IsCurrentPage("/Blogs?urlHandle=CSharp")?"active":"")" asp-area="" asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="CSharp">C#</a></li>
+                            <li><a class="dropdown-item @(IsCurrentPage("/Blogs?urlHandle=Python")?"active":"")" asp-area="" asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="Python">Python</a></li>
+                            <li><a class="dropdown-item @(IsCurrentPage("/Blogs?urlHandle=SQL")?"active":"")" asp-area="" asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="SQL">SQL</a></li>
+                            <li><a class="dropdown-item @(IsCurrentPage("/Blogs?urlHandle=AI")?"active":"")" asp-area="" asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="AI">AI</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(IsCurrentPage("/about")?"active":"")" asp-controller="About" asp-action="Index">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(IsCurrentPage("/contact")?"active":"")" asp-controller="Contact" asp-action="Index">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            @* <button class="join-btn hover1" type="button">Join Now</button> *@
+
+            @if (signInManager.IsSignedIn(User))
+            {
+                <a class="join-btn hover1" asp-controller="Account" asp-action="Logout">Sign Out</a>
+            }
+            else
+            {
+                <a class="join-btn hover1" asp-controller="Account" asp-action="Login">Sign In</a>
+            }
+
+        </div>
+    </nav>
+    <!--===== aside navigation slidebar =====-->
+    <aside>
+        <div id="mySidenav" class="right-sidbar">
+            <div class="side-nav-logo d-flex justify-content-between align-items-center ps-2 pe-1 nav-logo">
+                <div class="navbar-brand"><a asp-controller="Home" asp-action="Index"><img src="~/assets/images/logo.svg" alt="Logo"></a></div>
+                <button class="fa-solid fa-xmark"
+                        onclick="close_aside()"> </button>
+            </div>
+            <ul>
+
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a aria-current="page" asp-controller="Account" asp-action="Logout">Sign Out</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a aria-current="page" asp-controller="Account" asp-action="Login">Sign In</a>
+                    </li>
+                }
+
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <li class="nav-item">
+                        <div class="d-flex align-items-center justify-content-between " id="slidadmin-btn">
+                            <button class="a-slid page-btn @(IsDropdownActive("/Admin") ? " active" : "")" style="color:#1B1117">Admin</button>
+                            <i class="fa-solid fa-caret-down pe-2"></i>
+                        </div>
+                        <ul id="slidadmin-drop">
+                            <li><a class="dropdown-item @(IsCurrentPage("/AdminTags/Add")?"active-color":"")" asp-area="" asp-controller="AdminTags" asp-action="Add">Add Tag</a></li>
+                            <li><a class="dropdown-item @(IsCurrentPage("/AdminTags/List")?"active-color":"")" asp-area="" asp-controller="AdminTags" asp-action="List">Show All Tags</a></li>
+                            <li><a class="dropdown-item @(IsCurrentPage("/AdminBlogPosts/Add")?"active-color":"")" asp-area="" asp-controller="AdminBlogPosts" asp-action="Add">Add Blog Post</a></li>
+                            <li><a class="dropdown-item @(IsCurrentPage("/AdminBlogPosts/List")?"active-color":"")" asp-area="" asp-controller="AdminBlogPosts" asp-action="List">Show All BlogPosts</a></li>
+                        </ul>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a aria-current="page" class="@(IsCurrentPage("/")?"active-color":"")" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <div class="d-flex align-items-center justify-content-between " id="slid-btn">
+                        <button class="a-slid page-btn @(IsDropdownActive("/Blogs") ? " active" : "")" style="color:#1B1117">Blogs</button>
+                        <i class="fa-solid fa-caret-down pe-2"></i>
+                    </div>
+                    <ul id="slid-drop">
+                        <li><a class="dropdown-item @(IsCurrentPage("/Blogs?urlHandle=CSharp")?"active":"")" asp-area="" asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="CSharp">C#</a></li>
+                        <li><a class="dropdown-item @(IsCurrentPage("/Blogs?urlHandle=Python")?"active":"")" asp-area="" asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="Python">Python</a></li>
+                        <li><a class="dropdown-item @(IsCurrentPage("/Blogs?urlHandle=SQL")?"active":"")" asp-area="" asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="SQL">SQL</a></li>
+                        <li><a class="dropdown-item @(IsCurrentPage("/Blogs?urlHandle=AI")?"active":"")" asp-area="" asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="AI">AI</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="About" asp-action="Index" class="@(IsCurrentPage("/about")?"active-color":"")">About</a>
+                <li class="nav-item">
+                    <a asp-controller="Contact" asp-action="Index" class="@(IsCurrentPage("/contact")?"active-color":"")">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</header>
+<!-- ======== End of 1.1. header section ======== -->
+@functions {
+    // Helper function to check if any dropdown item is active
+    bool IsDropdownActive(string dropdownPage)
+    {
+        var currentPage = Context.Request.Path;
+
+        if (currentPage.Value.ToLower().Contains(dropdownPage.ToLower()))
+        {
+            return true;
+        }
+        return false;
+
+        if (currentPage.Value == "/" || currentPage.Value == "/About" || currentPage.Value == "/Contact")
+        {
+            return false;
+        }
+        return true;
+    }
+
+    // Helper function to check if the current page matches the provided PageName
+    bool IsCurrentPage(string pageName)
+    {
+        var currentPage = Context.Request.Path;
+
+        if (currentPage.Value.ToLower() == "/blogs")
+        {
+            currentPage += Context.Request.QueryString;
+        }
+
+        if (pageName.ToLower() == currentPage.Value.ToLower())
+        {
+            return true;
+        }
+        return false;
+    }
+}

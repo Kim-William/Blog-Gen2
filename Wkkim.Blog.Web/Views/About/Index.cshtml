@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+<!-- ======== 2.1. banner section ========  -->
+<div class="banner">
+    <div class="container">
+        <h2>ABOUT ME</h2>
+        <nav aria-label="breadcrumb">
+        </nav>
+    </div>
+</div>
+<!-- ======== End of 2.1. banner section ========  -->
+<!-- ========  2.2. hero-about section ========  -->
+<section class="hero-about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 d-flex flex-column justify-content-center" data-aos="fade-down">
+                <h5 class="h6-color">About Me</h5>
+                <h2>Learn more about <span class="active-color">WOONGGEOL KIM</span></h2>
+                <p class="hero-about-p">who has exceptional adaptability and extensive knowledge across various development environments and industries.</p>
+                <div class="d-flex flex-column gap-4">
+                    <div class="d-flex gap-3"><i class="fa-regular fa-circle-dot"></i><span>@((DateTime.Now - new DateTime(2016, 08, 12)).Days / 365)+ Experience in C#</span></div>
+                    <div class="d-flex gap-3"><i class="fa-regular fa-circle-dot"></i><span>@((DateTime.Now - new DateTime(2016, 08, 12)).Days / 365)+ Experience in SQL</span></div>
+                    <div class="d-flex gap-3"><i class="fa-regular fa-circle-dot"></i><span>Experience with Python through AI and web development.</span></div>
+                    <div class="d-flex gap-3"><i class="fa-regular fa-circle-dot"></i><span>Experience with commercial libraries such as DevExpress.</span></div>
+                    <div class="d-flex gap-3"><i class="fa-regular fa-circle-dot"></i><span>Served as the head of the Hungarian subsidiary of a Korean company.</span></div>
+                </div>
+                <div class="d-flex justify-content-lg-start justify-content-md-start justify-content-sm-center justify-content-center">
+                    <a asp-controller="Contact" asp-action="Index" class="hover1">Contact</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 position-relative" data-aos="fade-up">
+                <div class="about-circle"></div>
+                <div class="about-image1"><figure><img src="~/assets/images/about/about-me-csharp.jpg" alt="girl-image"></figure></div>
+                <div class="about-image2"><figure><img src="~/assets/images/about/about-me-python.jpg" alt="girl-image"></figure></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ======== End of 2.2. hero-about section ========  -->
+<!-- ========  1.4. Amenities section ========  -->
+<section class="Amenities" data-aos="fade-down">
+    <div class="container">
+        <h2>Kim's <span class="active-color">Skill Set</span></h2>
+        <p class="amenities-p">Here are WoongKeol's key skills. Click the icons for more detailed information.</p>
+        <div class="amenities-slider">
+            <div class="amenities-card col">
+                <a asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="SQL"><img src="~/assets/images/icon/developer.png" alt="Icon"></a>
+                <h5>Strong problem-solving skills</h5>
+                <p>Prioritizing and fulfilling customer requirements.</p>
+            </div>
+            <div class="amenities-card col">
+                <a asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="SQL"><img src="~/assets/images/icon/expertise.png" alt="Icon"></a>
+                <h5>High level of expertise</h5>
+                <p>Able to acquire advanced knowledge in unfamiliar industries faster than anyone else.</p>
+            </div>
+            <div class="amenities-card col">
+                <a asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="SQL"><img src="~/assets/images/icon/organization.png" alt=" Icon"></a>
+                <h5>Managing Director</h5>
+                <p>Overseeing overall operations including scheduling, personnel management, purchasing costs, sales costs, and corporate maintenance.</p>
+            </div>
+            <div class="amenities-card col">
+                <a asp-controller="Blogs" asp-action="Index" asp-route-urlHandle="SQL"><img src="~/assets/images/icon/team-building.png" alt="Icon"></a>
+                <h5>Excellent interpersonal skills</h5>
+                <p>Creating a collaborative environment tailored to the individual strengths of team members.</p>
+            </div>
+        </div>
+    </div>
+</section>
