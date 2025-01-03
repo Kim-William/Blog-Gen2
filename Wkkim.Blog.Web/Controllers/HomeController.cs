@@ -34,13 +34,20 @@ namespace Wkkim.Blog.Web.Controllers
             var blogPosts = await blogPostRepository.GetAllAsync();
 
             blogPosts = blogPosts.Where(t => t.Visible);
-
             // get all tags
             var tags = await tagRepository.GetAllAsync();
 
+            var blogLists = blogPosts.ToList();
+            if (blogLists.Count > 1)
+            {
+                var temp = blogLists[0];
+                blogLists[0] = blogLists[1];
+                blogLists[1] = temp;
+            }
+
             var model = new HomeViewModel
             {
-                BlogPosts = blogPosts.ToList(),
+                BlogPosts = blogLists,
                 Tags = tags
             };
 
