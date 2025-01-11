@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews(options =>
 {
-    //options.Filters.Add<LogIpAddressFilter>();
+    //options.Filters.Add<LogIpAddressFilter>(); 
 });
 
 //builder.Services.AddLogging();
