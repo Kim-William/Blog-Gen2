@@ -115,3 +115,4 @@ Wkkim.Blog.Web/Dockerfile.original
 /Wkkim.Blog.Web/node_modules
 Wkkim.Blog.Web/appsettings.Development.json
 Wkkim.Blog.Web/appsettings_master.json
+/bin

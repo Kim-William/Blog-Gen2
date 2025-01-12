@@ -431,7 +431,7 @@ aside li{
 /* ========= End of 1.1. header section ========= */
 /* ========= 1.2. hero section ========= */
 .hero{
-    padding: 100px 0px;
+    padding: 50px 0px;
 }
 .hero h1{
     text-transform: uppercase;
@@ -1263,7 +1263,7 @@ aside li{
     color: #FF6A58;
 }
  .news{
-    padding: 100px 0px;
+    padding: 50px 0px;
  }
  .news h2{
     text-align: center;
@@ -1490,7 +1490,7 @@ footer .col-lg-3:nth-child(2) i{
 }
 footer h5{
     color: #FF6A58;
-    padding: 16px 0px 32px 0px;
+    padding: 16px 0px 16px 0px;
 }
 footer hr{
     color: #60565C;
@@ -1620,7 +1620,7 @@ footer .col-lg-3:first-child i:hover{
 
  .hero-about{
     background-color: #fff;
-    padding-top: 100px;
+    padding-top: 50px;
  }
  .about-circle{
     width: 250px;
