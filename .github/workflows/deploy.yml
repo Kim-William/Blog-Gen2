@@ -3,7 +3,7 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - main  # main 브랜치에 푸시가 있을 때 배포하도록 설정
+      - main 
 
 jobs:
   build-and-deploy:

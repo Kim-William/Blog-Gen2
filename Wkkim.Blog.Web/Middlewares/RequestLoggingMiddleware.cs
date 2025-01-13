@@ -1,5 +1,7 @@
 ﻿using System.IO;
 
+using Newtonsoft.Json;
+
 namespace Wkkim.Blog.Web.Middlewares
 {
     public class RequestLoggingMiddleware
@@ -35,7 +37,21 @@ namespace Wkkim.Blog.Web.Middlewares
             var fullUrl = $"{context.Request.Path}{context.Request.QueryString}";
             var ipAddress = context.Connection.RemoteIpAddress?.ToString();
 
-            _logger.LogInformation("{"+$"id:{id},Method:{method},url:{fullUrl}|ip:{ipAddress}"+"}");
+            var logData = new
+            {
+                id = id,            
+                method = method,    
+                url = fullUrl,      
+                ip = ipAddress      
+            };
+
+            // Serialize the object to a JSON string
+            string jsonString = JsonConvert.SerializeObject(logData);
+
+            // Save or log the JSON string
+            Console.WriteLine(jsonString);
+
+            _logger.LogInformation(jsonString);
 
 
             await _next(context);
