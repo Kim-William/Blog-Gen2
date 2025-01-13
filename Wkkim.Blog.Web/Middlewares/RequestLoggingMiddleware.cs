@@ -17,7 +17,8 @@ namespace Wkkim.Blog.Web.Middlewares
         {
             var path = context.Request.Path.ToString();
             if (path.EndsWith(".css") || path.EndsWith(".js") || path.EndsWith(".png") ||
-            path.EndsWith(".jpg") || path.EndsWith(".ico") || path.StartsWith("/_framework") || path.StartsWith("/_vs") || path.StartsWith("/css"))
+            path.EndsWith(".jpg") || path.EndsWith(".ico") || path.StartsWith("/_framework") || path.StartsWith("/_vs") || path.StartsWith("/css") || 
+            path.StartsWith("/assts"))
             {
                 await _next(context);
                 return;
@@ -34,7 +35,7 @@ namespace Wkkim.Blog.Web.Middlewares
             var fullUrl = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}{context.Request.QueryString}";
             var ipAddress = context.Connection.RemoteIpAddress?.ToString();
 
-            _logger.LogInformation($"ID:{id}|Method:{method}|URL:{fullUrl}|IP:{ipAddress}|CLIENTIP:{clientIp}");
+            _logger.LogInformation($"ID:{id}|Method:{method}|URL:{fullUrl}|IP:{ipAddress}");
 
 
             await _next(context);
