@@ -129,6 +129,8 @@
                 <li class="nav-item">
                     <a asp-controller="About" asp-action="Index" class="@(IsCurrentPage("/about")?"active-color":"")">About</a>
                 <li class="nav-item">
+                    <a asp-controller="Home" asp-action="Privacy" class="@(IsCurrentPage("/home/privacy")?"active-color":"")">Privacy</a>
+                <li class="nav-item">
                     <a asp-controller="Contact" asp-action="Index" class="@(IsCurrentPage("/contact")?"active-color":"")">Contact</a>
                 </li>
             </ul>
