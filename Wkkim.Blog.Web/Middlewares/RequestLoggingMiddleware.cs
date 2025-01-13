@@ -32,10 +32,10 @@ namespace Wkkim.Blog.Web.Middlewares
             var request = context.Request;
             var method = context.Request.Method; 
 
-            var fullUrl = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}{context.Request.QueryString}";
+            var fullUrl = $"{context.Request.Path}{context.Request.QueryString}";
             var ipAddress = context.Connection.RemoteIpAddress?.ToString();
 
-            _logger.LogInformation($"ID:{id}|Method:{method}|URL:{fullUrl}|IP:{ipAddress}");
+            _logger.LogInformation("{"+$"id:{id},Method:{method},url:{fullUrl}|ip:{ipAddress}"+"}");
 
 
             await _next(context);
