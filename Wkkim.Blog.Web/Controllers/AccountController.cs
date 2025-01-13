@@ -61,10 +61,18 @@ namespace Wkkim.Blog.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-            var signInResult = await signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, false ,false                );
-        
+            Console.WriteLine(loginViewModel.RememberMe);
+            // 비밀번호 확인 및 사용자 인증
+            var signInResult = await signInManager.PasswordSignInAsync(
+                loginViewModel.UserName,
+                loginViewModel.Password,
+                loginViewModel.RememberMe, // RememberMe 값 전달
+                lockoutOnFailure: false);
+
+
             if (signInResult != null && signInResult.Succeeded)
             {
                 if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl))

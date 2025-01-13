@@ -10,20 +10,18 @@ using Wkkim.Blog.Web.Models;
 using Wkkim.Blog.Web.Models.Domain;
 using Wkkim.Blog.Web.Models.ViewModels;
 using Wkkim.Blog.Web.Repositories;
+using CloudinaryDotNet;
+using System;
 
 namespace Wkkim.Blog.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IBlogPostRepository blogPostRepository;
         private readonly ITagRepository tagRepository;
 
-        public HomeController(
-            IBlogPostRepository blogPostRepository,
-            ITagRepository tagRepository)
+        public HomeController(IBlogPostRepository blogPostRepository,ITagRepository tagRepository)
         {
-            //_logger = logger;
             this.blogPostRepository = blogPostRepository;
             this.tagRepository = tagRepository;
         }
