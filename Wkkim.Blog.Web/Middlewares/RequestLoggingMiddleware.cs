@@ -25,13 +25,16 @@ namespace Wkkim.Blog.Web.Middlewares
 
             var id = context.Connection.Id;
 
+            var clientIp = context.Request.Headers["X-Forwarded-For"].FirstOrDefault()
+                      ?? context.Connection.RemoteIpAddress?.ToString();
+
             var request = context.Request;
             var method = context.Request.Method; 
 
             var fullUrl = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}{context.Request.QueryString}";
             var ipAddress = context.Connection.RemoteIpAddress?.ToString();
 
-            _logger.LogInformation($"ID:{id}|Method:{method}|URL:{fullUrl}|IP:{ipAddress}");
+            _logger.LogInformation($"ID:{id}|Method:{method}|URL:{fullUrl}|IP:{ipAddress}|CLIENTIP:{clientIp}");
 
 
             await _next(context);

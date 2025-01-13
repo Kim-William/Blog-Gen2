@@ -116,3 +116,4 @@ Wkkim.Blog.Web/Dockerfile.original
 Wkkim.Blog.Web/appsettings.Development.json
 Wkkim.Blog.Web/appsettings_master.json
 /bin
+/Wkkim.Blog.Web/logs

@@ -11,10 +11,9 @@ using Wkkim.Blog.Web.Middlewares;
 using Wkkim.Blog.Web.Repositories;
 using Serilog;
 using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddSingleton<LoggingService>();
 
 if (builder.Environment.IsDevelopment())
 {
@@ -92,6 +91,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+    ForwardLimit = null 
+});
 
 app.UseMiddleware<RequestLoggingMiddleware>();
 
