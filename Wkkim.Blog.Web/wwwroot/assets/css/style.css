@@ -1681,8 +1681,11 @@ footer .col-lg-3:first-child i:hover{
 .hero-about .gap-4 {
     padding: 30px 0px;
 }
-.hero-about span{
+.hero-about span {
     color: #FF6A58;
+}
+.technical {
+    color: blueviolet;
 }
 .hero-about i{
     color: #22B0FC;
