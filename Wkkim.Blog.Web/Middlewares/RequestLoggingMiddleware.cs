@@ -7,52 +7,29 @@ namespace Wkkim.Blog.Web.Middlewares
     public class RequestLoggingMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<RequestLoggingMiddleware> _logger;
 
-        public RequestLoggingMiddleware(RequestDelegate next, ILogger<RequestLoggingMiddleware> logger)
+        public RequestLoggingMiddleware(RequestDelegate next)
         {
             _next = next;
-            _logger = logger;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider)
         {
             var path = context.Request.Path.ToString();
             if (path.EndsWith(".css") || path.EndsWith(".js") || path.EndsWith(".png") || path.EndsWith(".svg") ||
-            path.EndsWith(".jpg") || path.EndsWith(".ico") || path.StartsWith("/_framework") || path.StartsWith("/_vs") || path.StartsWith("/css") || 
-            path.StartsWith("/assets")|| path.StartsWith("/image"))
+            path.EndsWith(".jpg") || path.EndsWith(".ico") || path.StartsWith("/_framework") || path.StartsWith("/_vs") || path.StartsWith("/css") ||
+            path.StartsWith("/assets") || path.StartsWith("/image"))
             {
                 await _next(context);
                 return;
             }
 
-            var id = context.Connection.Id;
-
-            var clientIp = context.Request.Headers["X-Forwarded-For"].FirstOrDefault()
-                      ?? context.Connection.RemoteIpAddress?.ToString();
-
-            var request = context.Request;
-            var method = context.Request.Method; 
-
-            var fullUrl = $"{context.Request.Path}{context.Request.QueryString}";
-            var ipAddress = context.Connection.RemoteIpAddress?.ToString();
-
-            var logData = new
+            using (var scope = serviceProvider.CreateScope())
             {
-                id = id,            
-                method = method,    
-                url = fullUrl,      
-                ip = ipAddress      
-            };
+                var logService = scope.ServiceProvider.GetRequiredService<LogService>();
 
-            // Serialize the object to a JSON string
-            string jsonString = JsonConvert.SerializeObject(logData);
-
-            // Save or log the JSON string
-            Console.WriteLine(jsonString);
-
-            _logger.LogInformation(jsonString);
-
+                await logService.LogRequestAsync(context);
+            }
 
             await _next(context);
         }

@@ -15,6 +15,21 @@ using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+        options.ExpireTimeSpan = TimeSpan.FromDays(14);
+        options.SlidingExpiration = true;
+        options.Cookie.HttpOnly = true; // Prevent JavaScript access to cookies
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Use secure cookies (HTTPS)
+        options.Cookie.SameSite = SameSiteMode.Strict; // Prevent cross-site requests
+    });
+
+
 if (builder.Environment.IsDevelopment())
 {
     Log.Logger = new LoggerConfiguration()
@@ -57,6 +72,8 @@ options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)).U
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDBContext>();
+
+builder.Services.AddScoped<LogService>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

@@ -177,10 +177,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EditorConfigFiles Remove="E:\GitHub\blog_gen2\Wkkim.Blog.Web\.editorconfig" />
   </ItemGroup>
 

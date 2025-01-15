@@ -1,4 +1,7 @@
 ﻿
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,16 +68,27 @@ namespace Wkkim.Blog.Web.Controllers
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             Console.WriteLine(loginViewModel.RememberMe);
-            // 비밀번호 확인 및 사용자 인증
+
             var signInResult = await signInManager.PasswordSignInAsync(
                 loginViewModel.UserName,
                 loginViewModel.Password,
-                loginViewModel.RememberMe, // RememberMe 값 전달
+                loginViewModel.RememberMe,
                 lockoutOnFailure: false);
 
-
-            if (signInResult != null && signInResult.Succeeded)
+            if (signInResult.Succeeded)
             {
+                var user = await userManager.FindByNameAsync(loginViewModel.UserName);
+                var claims = new List<Claim>    
+                {
+                    new Claim(ClaimTypes.Name, user.UserName),     
+                    new Claim(ClaimTypes.Email, user.Email)
+                };
+
+                var identity = new ClaimsIdentity(claims, "Cookies");
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync("Cookies", principal);
+
                 if (!string.IsNullOrWhiteSpace(loginViewModel.ReturnUrl))
                 {
                     return Redirect(loginViewModel.ReturnUrl);
@@ -83,13 +97,14 @@ namespace Wkkim.Blog.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            ModelState.AddModelError("", "Invalid username or password");
+            return View(loginViewModel);
         }
 
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-             await signInManager.SignOutAsync();
+            await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 
