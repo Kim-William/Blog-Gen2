@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <History>False|2025-01-17T15:38:33.6722176Z||;False|2025-01-17T16:38:29.2713601+01:00||;False|2024-12-31T21:40:08.1277408+01:00||;False|2024-12-31T21:33:13.7372496+01:00||;False|2024-12-31T21:32:12.8511722+01:00||;</History>
-    <LastFailureDetails>2025-01-17T15:38:33.6722176Z|checkContainerPrereq</LastFailureDetails>
+    <History>False|2024-12-31T20:40:08.1277408Z||;False|2024-12-31T21:33:13.7372496+01:00||;False|2024-12-31T21:32:12.8511722+01:00||;</History>
+    <LastFailureDetails>2024-12-31T20:40:08.1277408Z|checkContainerPrereq</LastFailureDetails>
   </PropertyGroup>
 </Project>
