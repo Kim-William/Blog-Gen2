@@ -16,9 +16,9 @@ namespace Wkkim.Blog.Web.Middlewares
         public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider)
         {
             var path = context.Request.Path.ToString();
-            if (path.EndsWith(".css") || path.EndsWith(".js") || path.EndsWith(".png") || path.EndsWith(".svg") ||
+            if (path.EndsWith(".css") || path.EndsWith(".php") || path.EndsWith(".xml") || path.EndsWith(".js") || path.EndsWith(".png") || path.EndsWith(".svg") || path.EndsWith(".map") ||
             path.EndsWith(".jpg") || path.EndsWith(".ico") || path.StartsWith("/_framework") || path.StartsWith("/_vs") || path.StartsWith("/css") ||
-            path.StartsWith("/assets") || path.StartsWith("/image"))
+            path.StartsWith("/assets") || path.StartsWith("/image") || path.StartsWith("/lib") || path.StartsWith("//"))
             {
                 await _next(context);
                 return;
