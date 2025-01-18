@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "C#: Wkkim.Blog.Web [http]",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}\\Wkkim.Blog.Web\\Wkkim.Blog.Web.csproj",
+            "launchConfigurationId": "TargetFramework=;http"
+        }
+    ]
+}
