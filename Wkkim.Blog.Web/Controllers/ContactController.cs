@@ -19,10 +19,11 @@ namespace Wkkim.Blog.Web.Controllers
             IConfiguration configuration)
         {
             _logger = logger;
-            this.configuration = configuration;
-            email_id = configuration.GetSection("EMail")["ID"];
-            email_password = configuration.GetSection("EMail")["Password"];
+            this.configuration = configuration; 
+            email_id = Environment.GetEnvironmentVariable("EMAIL_ID");
+            email_password = Environment.GetEnvironmentVariable("EMAIL_PASSWORD");
         }
+
         public IActionResult Index()
         {
             return View();
