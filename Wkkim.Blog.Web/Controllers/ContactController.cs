@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Wkkim.Blog.Web.Models;
 using Wkkim.Blog.Web.Models.ViewModels;
 using Wkkim.Blog.Web.Repositories;
+using System.ServiceModel.Channels;
 
 namespace Wkkim.Blog.Web.Controllers
 {
@@ -34,6 +35,8 @@ namespace Wkkim.Blog.Web.Controllers
         {
             if (!string.IsNullOrEmpty(fullName) && !string.IsNullOrEmpty(emailAddress) && !string.IsNullOrEmpty(phoneNo) && !string.IsNullOrEmpty(message))
             {
+                _logger.Log(LogLevel.Information, $"FullName: {fullName} | Email: {emailAddress} | PhoneNumber: {phoneNo} | MSG: {message}");
+                _logger.Log(LogLevel.Information, $"EMAIL: {email_id} | Email: {email_password}");
                 ContactForm contactUs = new ContactForm()
                 {
                     FullName = fullName,
