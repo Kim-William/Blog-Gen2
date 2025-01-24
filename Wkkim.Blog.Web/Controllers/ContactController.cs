@@ -72,7 +72,7 @@ namespace Wkkim.Blog.Web.Controllers
 
                     using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
                     {
-                        smtp.Credentials = new NetworkCredential(email_id, email_password);
+                        smtp.Credentials = new NetworkCredential(email_id, "email_password");
                         smtp.EnableSsl = enableSSL;
                         smtp.Send(mail);
                     }
@@ -80,8 +80,9 @@ namespace Wkkim.Blog.Web.Controllers
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.Log(LogLevel.Error, ex.Message);
             }
 
             return false;
