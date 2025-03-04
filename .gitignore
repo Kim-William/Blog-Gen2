@@ -121,3 +121,4 @@ Wkkim.Blog.Web/wwwroot/ads.txt
 Wkkim.Blog.Web/Properties/PublishProfiles/registry.hub.docker.com_wkkim9211112.pubxml.user
 Wkkim.Blog.Web/Properties/PublishProfiles/registry.hub.docker.com_wkkim9211112.pubxml.user
 /Wkkim.Blog.Web/wwwroot/image
+.DS_Store
