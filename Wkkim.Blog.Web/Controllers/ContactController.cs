@@ -22,7 +22,7 @@ namespace Wkkim.Blog.Web.Controllers
             _logger = logger;
             this.configuration = configuration; 
             email_id = Environment.GetEnvironmentVariable("EMAIL_ID");
-            email_password = Environment.GetEnvironmentVariable("EMAIL_PASSWORD");
+            email_password = "pgqe cfvh uhcv zefn";// Environment.GetEnvironmentVariable("EMAIL_PASSWORD");
         }
 
         public IActionResult Index()
@@ -75,7 +75,7 @@ namespace Wkkim.Blog.Web.Controllers
 
                     using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
                     {
-                        smtp.Credentials = new NetworkCredential(email_id, "email_password");
+                        smtp.Credentials = new NetworkCredential(email_id, email_password);
                         smtp.EnableSsl = enableSSL;
                         smtp.Send(mail);
                     }
