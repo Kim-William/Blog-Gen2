@@ -22,7 +22,7 @@ namespace Wkkim.Blog.Web.Controllers
             _logger = logger;
             this.configuration = configuration; 
             email_id = Environment.GetEnvironmentVariable("EMAIL_ID");
-            email_password = "pgqe cfvh uhcv zefn";// Environment.GetEnvironmentVariable("EMAIL_PASSWORD");
+            email_password = Environment.GetEnvironmentVariable("EMAIL_PASSWORD");
         }
 
         public IActionResult Index()
