@@ -3,11 +3,6 @@
 ################################################################################
 
 /.vs
-/Wkkim.Blog.Web/bin/Debug/net7.0/appsettings.json
-/Wkkim.Blog.Web/bin/Debug/net8.0/appsettings.json
-/Wkkim.Blog.Web/bin/Release/net8.0/appsettings.json
-/Wkkim.Blog.Web/bin/Release/net7.0/appsettings.json
-/Wkkim.Blog.Web/appsettings.json
 Wkkim.Blog.Web/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs
 Wkkim.Blog.Web/obj/Debug/net7.0/Wkkim.Blog.Web.AssemblyInfo.cs
 Wkkim.Blog.Web/obj/Debug/net7.0/Wkkim.Blog.Web.AssemblyInfoInputs.cache
@@ -22,7 +17,6 @@ Wkkim.Blog.Web/obj/project.nuget.cache
 Wkkim.Blog.Web/obj/Wkkim.Blog.Web.csproj.nuget.dgspec.json
 Wkkim.Blog.Web/obj/Wkkim.Blog.Web.csproj.nuget.g.props
 Wkkim.Blog.Web/obj/Wkkim.Blog.Web.csproj.nuget.g.targets
-Wkkim.Blog.Web/appsettings.json
 Wkkim.Blog.Web/bin/Debug/net7.0/appsettings.Development.json
 Wkkim.Blog.Web/bin/Debug/net7.0/Azure.Core.dll
 Wkkim.Blog.Web/bin/Debug/net7.0/Azure.Identity.dll
@@ -113,7 +107,6 @@ Wkkim.Blog.Web/Dockerfile
 Wkkim.Blog.Web/Dockerfile.original
 /Wkkim.Blog.Web/Migrations
 /Wkkim.Blog.Web/node_modules
-Wkkim.Blog.Web/appsettings.Development.json
 Wkkim.Blog.Web/appsettings_master.json
 /bin
 /Wkkim.Blog.Web/logs

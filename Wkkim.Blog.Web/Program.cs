@@ -57,13 +57,15 @@ builder.Services.AddControllersWithViews(options =>
 
 ILoggerFactory NullLoggerFactory = LoggerFactory.Create(builder => { });
 
-// ·Î±× ÇÊÅÍ ¼³Á¤
-builder.Logging.ClearProviders(); // ¸ðµç ±âº» ·Î°Å Á¦°Å
-builder.Logging.AddConsole();    // ÄÜ¼Ö ·Î±ë Ãß°¡ (¿øÇÏ´Â °æ¿ì)
-builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.None); // DB ¸í·É¾î ·Î±× Á¦°Å
-builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Query", LogLevel.None);           // Äõ¸® °ü·Ã ·Î±× Á¦°Å
+// ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+builder.Logging.ClearProviders(); // ï¿½ï¿½ï¿½ ï¿½âº» ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½
+builder.Logging.AddConsole();    // ï¿½Ü¼ï¿½ ï¿½Î±ï¿½ ï¿½ß°ï¿½ (ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½)
+builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.None); // DB ï¿½ï¿½ï¿½É¾ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½
+builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Query", LogLevel.None);           // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 var connectionString = builder.Configuration.GetConnectionString("BlogDbConnectionString");
+// Console.WriteLine(connectionString);
+connectionString = AesCrypto.Decrypt(connectionString);
 builder.Services.AddDbContext<BlogDbContext>(options =>
 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)).UseLoggerFactory(NullLoggerFactory));
 
