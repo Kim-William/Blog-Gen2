@@ -115,3 +115,4 @@ Wkkim.Blog.Web/Properties/PublishProfiles/registry.hub.docker.com_wkkim9211112.p
 Wkkim.Blog.Web/Properties/PublishProfiles/registry.hub.docker.com_wkkim9211112.pubxml.user
 /Wkkim.Blog.Web/wwwroot/image
 .DS_Store
+Wkkim.Blog.Web/appsettings.json
